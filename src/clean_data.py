@@ -5,6 +5,7 @@ from pathlib import Path
 RAW_DATA_PATH = Path("data/raw/SampleSuperstore.csv")
 CLEANED_DATA_PATH = Path("data/cleaned/cleaned_data.csv")
 df = pd.read_csv(RAW_DATA_PATH)
+df["Order Date"] = pd.to_datetime(df["Order Date"])
 
 def clean_column_name(df):
     df.columns = (
