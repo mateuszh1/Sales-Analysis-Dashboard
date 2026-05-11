@@ -16,3 +16,4 @@ data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 screenshots/*.tmp
+data/raw/SampleSuperstore.csv
