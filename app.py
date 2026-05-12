@@ -67,3 +67,20 @@ col4.metric("Total Records", f"{total_records}")
 
 st.subheader("Filtered Data")
 st.dataframe(filtered_df)
+
+st.subheader("Charts")
+
+if "category" in filtered_df.columns and "sales" in filtered_df.columns:
+     sales_by_category = (
+          filtered_df
+          .groupby("category")["sales"]
+          .sum()
+          .sort_values(ascending=False)
+     )
+
+fig, ax = plt.subplots()
+sales_by_category.plot(kind="barh",ax=ax) 
+ax.set_title("Total Sales by Category")
+ax.set_xlabel("Sales")    
+ax.set_ylabel("Category")
+st.pyplot(fig)
