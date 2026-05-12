@@ -51,3 +51,16 @@ if "city" in df.columns:
           default=sorted(df["city"].dropna().unique())
      )
      filtered_df = filtered_df[filtered_df["city"].isin(selected_cities)]
+
+st.subheader("Key Metrics")
+col1,col2,col3, col4 = st.columns(4)
+
+total_sales = filtered_df["sales"].sum()
+total_profit = filtered_df["profit"].sum()
+total_quantity = filtered_df["quantity"].sum()
+total_records = len(filtered_df)
+
+col1.metric("Total Sales", f"${total_sales:,.2f}")
+col2.metric("Total Profit", f"${total_profit:,.2f}")
+col3.metric("Total Quantity", f"{total_quantity}")
+col4.metric("Total Records", f"{total_records}")
