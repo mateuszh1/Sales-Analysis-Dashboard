@@ -84,3 +84,17 @@ ax.set_title("Total Sales by Category")
 ax.set_xlabel("Sales")    
 ax.set_ylabel("Category")
 st.pyplot(fig)
+
+if "region" in filtered_df.columns and "profit" in filtered_df.columns:
+        Profit_by_region = (
+            filtered_df
+            .groupby("region")["profit"]
+            .sum()
+            .sort_values(ascending=False)
+        )
+fig, ax = plt.subplots()
+Profit_by_region.plot(kinda="barh", ax=ax)
+ax.set_title("Total Profit by Region")
+ax.set.xlabel("Region")
+ax.set_ylabel("Profit")
+st.pyplot(fig)
