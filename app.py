@@ -64,3 +64,6 @@ col1.metric("Total Sales", f"${total_sales:,.2f}")
 col2.metric("Total Profit", f"${total_profit:,.2f}")
 col3.metric("Total Quantity", f"{total_quantity}")
 col4.metric("Total Records", f"{total_records}")
+
+st.subheader("Filtered Data")
+st.dataframe(filtered_df)
