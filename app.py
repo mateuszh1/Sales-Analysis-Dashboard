@@ -30,7 +30,24 @@ filtered_df = df.copy()
 if "category" in df.columns:
     selected_categories = st.sidebar.multiselect(
         "Select Categories",
-        options=df["category"].dropna().unique(),
-        default=df["category"].dropna().unique()
+        options=sorted(df["category"].dropna().unique()),
+        default=sorted(df["category"].dropna().unique())
     )
     filtered_df = filtered_df[filtered_df["category"].isin(selected_categories)]
+
+if "region" in df.columns:
+        selected_regions = st.sidebar.multiselect(
+            "Select Regions",
+            options=sorted(df["region"].dropna().unique()),
+            default=sorted(df["region"].dropna().unique())
+
+        )
+        filtered_df = filtered_df[filtered_df["region"].isin(selected_regions)]
+
+if "city" in df.columns:
+     selected_cities = st.sidebar.multiselect(
+          "Select Cities",
+          options=sorted(df["city"].dropna().unique()),
+          default=sorted(df["city"].dropna().unique())
+     )
+     filtered_df = filtered_df[filtered_df["city"].isin(selected_cities)]
