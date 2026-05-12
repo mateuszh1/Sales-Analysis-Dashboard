@@ -98,3 +98,20 @@ ax.set_title("Total Profit by Region")
 ax.set_xlabel("Region")
 ax.set_ylabel("Profit")
 st.pyplot(fig)
+
+if "city" in filtered_df.columns and "sales" in filtered_df.columns:
+      top_cities = (
+            filtered_df
+            .groupby("city")["sales"]
+            .sum()
+            .sort_values(ascending=False)
+            .head(10)
+            .sort_values()
+
+      )
+fig, ax=plt.subplots()
+top_cities.plot(kind="barh", ax=ax)
+ax.set_title("Top 10 Cities by Sales")
+ax.set_xlabel("Sales")
+ax.set_ylabel("City")
+st.pyplot(fig)
