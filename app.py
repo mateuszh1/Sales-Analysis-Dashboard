@@ -21,11 +21,23 @@ def load_Data():
 st.title("Sales Analysis Dashboard")
 st.write("Interactive dashboard for supermarket sales analysis.")
 
+
+st.divider()
+st.sidebar.header("Filters")
+
 st.subheader("Data Overview")
 df = load_Data()
 st.dataframe(df.head())
 st.sidebar.header("Filters")
 filtered_df = df.copy()
+
+if "segement" in df.columns:
+      selected_segments = st.sidebar.multiselect(
+           "Segment",
+           options = sorted(df["segment"].dropna().unique()),
+           default=sorted(df["segment"].dropna().unique())
+      )
+filtered_df = filtered_df[filtered_df["segment"].isin(selected_segments)]
 
 if "category" in df.columns:
     selected_categories = st.sidebar.multiselect(
@@ -69,7 +81,7 @@ st.subheader("Filtered Data")
 st.dataframe(filtered_df)
 
 st.subheader("Charts")
-
+# Sales by category
 if "category" in filtered_df.columns and "sales" in filtered_df.columns:
      sales_by_category = (
           filtered_df
@@ -84,7 +96,7 @@ ax.set_title("Total Sales by Category")
 ax.set_xlabel("Sales")    
 ax.set_ylabel("Category")
 st.pyplot(fig)
-
+# Profit by region
 if "region" in filtered_df.columns and "profit" in filtered_df.columns:
         Profit_by_region = (
             filtered_df
@@ -99,6 +111,7 @@ ax.set_xlabel("Region")
 ax.set_ylabel("Profit")
 st.pyplot(fig)
 
+# Top 10 cities by sales
 if "city" in filtered_df.columns and "sales" in filtered_df.columns:
       top_cities = (
             filtered_df
